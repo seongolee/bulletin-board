@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="bulletinBoard:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/bulletinBoard_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="bulletinBoard/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="bulletinBoard" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
