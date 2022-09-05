@@ -23,5 +23,7 @@
 
     <context:component-scan base-package="com.bulletinBoard"/>
 
-    <view-controller path="/" view-name="index" />
+    <view-controller path="/" view-name="homeForm" />
+
 </beans:beans>
+
