@@ -9,7 +9,8 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     RegisterDao registerDao;
 
-    public int idCheck(String id) throws Exception {
-        return registerDao.idCheck(id);
+    public String idCheck(String id) throws Exception {
+        int idCheck = registerDao.idCheck(id);
+        return idCheck != 0 ? "false" : "true";
     }
 }
