@@ -74,19 +74,6 @@ public class UserDto {
         this.reg_date = reg_date;
     }
 
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "id='" + id + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", birth=" + birth +
-                ", phone_number='" + phone_number + '\'' +
-                ", reg_date=" + reg_date +
-                '}';
-    }
-
     public UserDto() {}
 
     public UserDto(String id, String pwd, String name, String email, Date birth, String phone_number, Date reg_date) {
