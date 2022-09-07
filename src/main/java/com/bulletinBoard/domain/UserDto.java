@@ -73,4 +73,16 @@ public class UserDto {
     public void setReg_date(Date reg_date) {
         this.reg_date = reg_date;
     }
+
+    public UserDto() {}
+
+    public UserDto(String id, String pwd, String name, String email, Date birth, String phone_number, Date reg_date) {
+        this.id = id;
+        this.pwd = pwd;
+        this.name = name;
+        this.email = email;
+        this.birth = birth;
+        this.phone_number = phone_number;
+        this.reg_date = reg_date;
+    }
 }
