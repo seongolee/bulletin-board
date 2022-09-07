@@ -16,7 +16,7 @@
 </head>
 <body>
 <%--<form action="<c:url value="/register/add"/>" method="POST" onsubmit="return formCheck(this)">--%>
-<form:form onsubmit="return formCheck(this)">
+<form:form enctype="multipart/form-data" onsubmit="return formCheck(this)">
     <div class="title">회원가입</div>
     <div id="msg" class="msg"></div>
     <label for="id">아이디</label>

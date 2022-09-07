@@ -18,6 +18,7 @@ public class BoardController {
 
     @GetMapping("/list")
     public String list(Model m) {
+        System.out.println("Controller");
         List<BoardDto> list = boardService.getList();
         m.addAttribute("list", list);
         return "boardList";

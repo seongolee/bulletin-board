@@ -22,7 +22,7 @@ public class RegisterController {
 
     // 회원등록(미완성)
     @PostMapping("/add")
-    public String save(UserDto userDto) {
+    public String save(@RequestBody UserDto userDto) {
         System.out.println(userDto.toString());
         return "";
     }
