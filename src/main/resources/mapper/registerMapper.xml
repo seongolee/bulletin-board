@@ -9,4 +9,9 @@
         FROM user_info
         WHERE id = #{value}
     </select>
+    <!-- 회원가입 유저 등록 -->
+    <insert id="insertUser" parameterType="UserDto">
+        INSERT INTO user_info
+        values (#{id}, #{pwd}, #{name}, #{email}, #{birth}, #{phone_number}, now())
+    </insert>
 </mapper>

@@ -1,18 +1,16 @@
 package com.bulletinBoard.controller;
 
 import com.bulletinBoard.domain.UserDto;
-import com.bulletinBoard.service.RegisterServiceImpl;
+import com.bulletinBoard.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
     @Autowired
-    RegisterServiceImpl registerService;
+    RegisterService registerService;
 
     // 회원가입 페이지
     @GetMapping("/add")
@@ -20,17 +18,18 @@ public class RegisterController {
         return "registerForm";
     }
 
-    // 회원등록(미완성)
+    // 회원등록
     @PostMapping("/add")
-    public String save(@RequestBody UserDto userDto) {
-        System.out.println(userDto.toString());
-        return "";
+    public String save(UserDto userDto) {
+        registerService.insertUser(userDto);
+        return "redirect:/";
     }
 
     // 아이디 중복확인
     @PostMapping("/idCheck")
     @ResponseBody
     public String idCheck(@RequestBody UserDto userDto) throws Exception {
+        System.out.println(userDto.getPwd());
         return registerService.idCheck(userDto.getId());
     }
 }

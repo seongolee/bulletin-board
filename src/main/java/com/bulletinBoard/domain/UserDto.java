@@ -1,6 +1,8 @@
 package com.bulletinBoard.domain;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 public class UserDto {
     // 아이디
@@ -76,6 +78,15 @@ public class UserDto {
 
     public UserDto() {}
 
+    public UserDto(String id, String pwd, String name, String email, String birth, String phone_number) throws ParseException {
+        this.id = id;
+        this.pwd = pwd;
+        this.name = name;
+        this.phone_number = phone_number;
+        this.email = email;
+        this.birth = Date.valueOf(birth);
+    }
+
     public UserDto(String id, String pwd, String name, String email, Date birth, String phone_number, Date reg_date) {
         this.id = id;
         this.pwd = pwd;
@@ -84,5 +95,18 @@ public class UserDto {
         this.birth = birth;
         this.phone_number = phone_number;
         this.reg_date = reg_date;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id='" + id + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", birth=" + birth +
+                ", phone_number='" + phone_number + '\'' +
+                ", reg_date=" + reg_date +
+                '}';
     }
 }

@@ -16,11 +16,11 @@
 </head>
 <body>
 <%--<form action="<c:url value="/register/add"/>" method="POST" onsubmit="return formCheck(this)">--%>
-<form:form enctype="multipart/form-data" onsubmit="return formCheck(this)">
+<form:form onsubmit="return formCheck(this)">
     <div class="title">회원가입</div>
     <div id="msg" class="msg"></div>
-    <label for="id">아이디</label>
-    <input class="input-field" type="text" name="id" onchange="idCheck(this)" placeholder="3~12자리의 영대소문자와 숫자 조합">
+    <label for="">아이디</label>
+    <input class="input-field" type="text" name="id" placeholder="3~12자리의 영대소문자와 숫자 조합">
     <label for="">비밀번호</label>
     <input class="input-field" type="password" name="pwd" placeholder="8~16자리의 영대소문자와 숫자 조합">
     <label for="">이름</label>
@@ -36,38 +36,31 @@
 <script>
     // 입력받은 데이터별 체크
     function formCheck(frm) {
-        // // 아이디 유효성 검사
-        // if(!regExpTest(/^[A-Za-z0-9]{3,12}$/g, frm.id.value, frm.id, '아이디는 3~12자리의 영문과 숫자만 가능합니다.')){
-        //     return false
-        // }
-        // // 비밀번호 유효성 검사
-        // if(!regExpTest(/^[A-Za-z0-9]{8,16}$/g, frm.pwd.value, frm.pwd, '비밀번호는 8~16자리의 영문과 숫자만 가능합니다.')){
-        //     return false
-        // }
-        // // 이름 유효성 검사
-        // if(!regExpTest(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,}$/, frm.name.value, frm.name, '이름은 한글 2글자 이상 가능합니다.')){
-        //     return false
-        // }
-        // // 휴대폰 유효성 검사
-        // if(!regExpTest(/^\d{2,3}-\d{3,4}-\d{4}$/, frm.phone_number.value, frm.phone_number, '휴대폰 형식만 가능합니다, 010-000-0000')){
-        //     return false
-        // }
-        // // 이메일 유효성 검사
-        // if(!regExpTest(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i, frm.email.value, frm.email, '이메일의 형식만 가능합니다, example@google.co.kr')){
-        //     return false
-        // }
-        // // 생년월일 유효성 검사
-        // if(!regExpTest(/^\d{4}-\d{1,2}-\d{1,2}$/, frm.birth.value, frm.birth, '생년월일 입력해주세요, 2020-12-31')){
-        //     return false
-        // }
-        return true;
-    }
-    // 알림 메시지
-    function setMessage(msg, element){
-        document.getElementById("msg").innerHTML = `<i class="fa fa-exclamation-circle"> ${'${msg}'}</i>`;
-        if(element) {
-            element.select();
+        // 아이디 유효성 검사
+        if(!regExpTest(/^[A-Za-z0-9]{3,12}$/g, frm.id.value, frm.id, '아이디는 3~12자리의 영문과 숫자만 가능합니다.')){
+            return false
         }
+        // 비밀번호 유효성 검사
+        if(!regExpTest(/^[A-Za-z0-9]{8,16}$/g, frm.pwd.value, frm.pwd, '비밀번호는 8~16자리의 영문과 숫자만 가능합니다.')){
+            return false
+        }
+        // 이름 유효성 검사
+        if(!regExpTest(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,}$/, frm.name.value, frm.name, '이름은 한글 2글자 이상 가능합니다.')){
+            return false
+        }
+        // 휴대폰 유효성 검사
+        if(!regExpTest(/^\d{2,3}-\d{3,4}-\d{4}$/, frm.phone_number.value, frm.phone_number, '휴대폰 형식만 가능합니다, 010-000-0000')){
+            return false
+        }
+        // 이메일 유효성 검사
+        if(!regExpTest(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i, frm.email.value, frm.email, '이메일의 형식만 가능합니다, example@google.co.kr')){
+            return false
+        }
+        // 생년월일 유효성 검사
+        if(!regExpTest(/^\d{4}-\d{1,2}-\d{1,2}$/, frm.birth.value, frm.birth, '생년월일 입력해주세요, 2020-12-31')){
+            return false
+        }
+        return true;
     }
 
     // 유효성 검사 메서드
@@ -77,6 +70,14 @@
             return false;
         }
         return true
+    }
+
+    // 알림 메시지
+    function setMessage(msg, element){
+        document.getElementById("msg").innerHTML = `<i class="fa fa-exclamation-circle"> ${'${msg}'}</i>`;
+        if(element) {
+            element.select();
+        }
     }
 
     // 아이디 중복확인 중복체크 버튼으로 대체 (수정할 예정)

@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 public class JDBCTest {
     static {
