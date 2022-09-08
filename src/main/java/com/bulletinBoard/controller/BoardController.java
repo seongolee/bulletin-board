@@ -23,10 +23,15 @@ public class BoardController {
     public String list(Model m, SearchCondition sc, HttpServletRequest request) {
         // 로그인이 되어있는지 확인
         if(!loginCheck(request))
-            return "redirect:/login/login";
+            // 로그인이 되어있지 않으면 로그인화면으로 보내면서 requestURL을 toURL 파람으로 저장
+            return "redirect:/login/login?toURL="+request.getRequestURI();
 
-        List<BoardDto> list = boardService.getList();
-        m.addAttribute("list", list);
+        int totalCnt = boardService.getSearchResultCnt(sc);
+        List<BoardDto> boardDtoList = boardService.getSearchResultPage(sc);
+
+        m.addAttribute("totalCnt", totalCnt);
+        m.addAttribute("boardDtoList", boardDtoList);
+
         return "boardList";
     }
 

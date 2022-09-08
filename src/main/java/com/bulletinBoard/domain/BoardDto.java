@@ -1,5 +1,7 @@
 package com.bulletinBoard.domain;
 
+import java.util.*;
+
 public class BoardDto {
     // 게시물 번호
     private Integer bno;
@@ -13,6 +15,8 @@ public class BoardDto {
     private int view_cnt;
     // 댓글수
     private int comment_cnt;
+    // 등록일
+    private Date reg_date;
 
     public Integer getBno() {
         return bno;
@@ -62,14 +66,36 @@ public class BoardDto {
         this.comment_cnt = comment_cnt;
     }
 
+    public Date getReg_date() {
+        return reg_date;
+    }
+
+    public void setReg_date(Date reg_date) {
+        this.reg_date = reg_date;
+    }
+
     public BoardDto() {}
 
-    public BoardDto(Integer bno, String title, String content, String writer, int view_cnt, int comment_cnt) {
+    public BoardDto(Integer bno, String title, String content, String writer, int view_cnt, int comment_cnt, Date reg_date) {
         this.bno = bno;
         this.title = title;
         this.content = content;
         this.writer = writer;
         this.view_cnt = view_cnt;
         this.comment_cnt = comment_cnt;
+        this.reg_date = reg_date;
+    }
+
+    @Override
+    public String toString() {
+        return "BoardDto{" +
+                "bno=" + bno +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", writer='" + writer + '\'' +
+                ", view_cnt=" + view_cnt +
+                ", comment_cnt=" + comment_cnt +
+                ", reg_date=" + reg_date +
+                '}';
     }
 }

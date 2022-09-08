@@ -6,5 +6,6 @@
     <typeAliases>
         <typeAlias alias="BoardDto" type="com.bulletinBoard.domain.BoardDto"/>
         <typeAlias alias="UserDto" type="com.bulletinBoard.domain.UserDto"/>
+        <typeAlias alias="SearchCondition" type="com.bulletinBoard.domain.SearchCondition"/>
     </typeAliases>
 </configuration>

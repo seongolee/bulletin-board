@@ -1,9 +1,11 @@
 package com.bulletinBoard.dao;
 
 import com.bulletinBoard.domain.BoardDto;
+import com.bulletinBoard.domain.SearchCondition;
 
 import java.util.List;
 
 public interface BoardDao {
-    List<BoardDto> selectAll();
+    List<BoardDto> searchSelectPage(SearchCondition sc);
+    int searchResultCnt(SearchCondition sc);
 }
