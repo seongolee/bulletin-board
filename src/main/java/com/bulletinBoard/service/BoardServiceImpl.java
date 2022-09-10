@@ -33,7 +33,19 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDto read(Integer bno) {
-        // 게시물 번호에 맞는 게시글 조회
+        // 게시글 조회
         return boardDao.read(bno);
+    }
+
+    @Override
+    public int remove(Integer bno, String writer) {
+        // 게시글 삭제
+        return boardDao.remove(bno, writer);
+    }
+
+    @Override
+    public int update(BoardDto boardDto) {
+        // 게시글 수정
+        return boardDao.update(boardDto);
     }
 }

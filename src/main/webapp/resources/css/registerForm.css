@@ -13,6 +13,7 @@ form {
     border-radius: 10px;
 }
 .input-field {
+    display: inline-block;
     width: 300px;
     height: 40px;
     border : 1px solid rgb(89,117,196);
@@ -26,15 +27,17 @@ label {
     height:30px;
     margin-top :4px;
 }
+.btn-wrapper {
+    display: flex;
+}
 button {
     background-color: rgb(89,117,196);
-    color : white;
-    width:300px;
-    height:50px;
-    font-size: 17px;
-    border : none;
+    color: white;
+    width: 140px;
+    height: 50px;
+    border: none;
     border-radius: 5px;
-    margin : 20px 0 30px 0;
+    margin: 20px 5px;
 }
 .title {
     font-size : 50px;

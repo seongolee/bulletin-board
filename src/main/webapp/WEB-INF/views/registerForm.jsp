@@ -31,9 +31,17 @@
     <input class="input-field" type="text" name="email" placeholder="example@google.com">
     <label for="">생년월일</label>
     <input class="input-field" type="text" name="birth" placeholder="2020-12-31">
-    <button type="submit">회원 가입</button>
+    <div class="btn-wrapper">
+        <button type="submit">확인</button>
+        <button type="button" id="cancel-btn">취소</button>
+    </div>
 </form:form>
 <script>
+    $(document).ready(function(){
+       $("#cancel-btn").on("click", function(){
+          location.href="<c:url value='/'/>";
+       });
+    });
     // 입력받은 데이터별 체크
     function formCheck(frm) {
         // 아이디 유효성 검사

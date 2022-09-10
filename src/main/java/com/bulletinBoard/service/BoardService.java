@@ -11,4 +11,6 @@ public interface BoardService {
     int getSearchResultCnt(SearchCondition sc);
     int write(BoardDto boardDto);
     BoardDto read(Integer bno);
+    int remove(Integer bno, String writer);
+    int update(BoardDto boardDto);
 }

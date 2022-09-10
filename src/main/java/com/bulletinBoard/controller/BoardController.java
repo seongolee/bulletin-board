@@ -36,6 +36,25 @@ public class BoardController {
         return "boardList";
     }
 
+    @PostMapping("/modify")
+    public String update(BoardDto boardDto, HttpSession session,Model m){
+        // bno, title, content -> boardDto
+        String writer = (String)session.getAttribute("id");
+        boardDto.setWriter(writer);
+
+        try{
+            if(boardService.update(boardDto) != 1)
+                throw new Exception("Update failed");
+            m.addAttribute("msg", "MOD_OK");
+
+        }catch(Exception e) {
+            e.printStackTrace();
+            m.addAttribute("msg", "MOD_ERR");
+        }
+
+        return "board";
+    }
+
     @GetMapping("/read")
     public String read(Integer bno, Model m){
         BoardDto boardDto = boardService.read(bno);
@@ -57,9 +76,8 @@ public class BoardController {
         boardDto.setWriter(writer);
 
         try{
-            if(boardService.write(boardDto)!=1){
+            if(boardService.write(boardDto)!=1)
                 throw new Exception("write failed");
-            }
         } catch(Exception e){
             e.printStackTrace();
             m.addAttribute("msg", "WRT_ERR");
@@ -69,6 +87,23 @@ public class BoardController {
         }
 
         return "redirect:/board/list";
+    }
+
+    @PostMapping("/remove")
+    public String delete(SearchCondition sc, Integer bno, HttpSession session){
+        String writer = (String)session.getAttribute("id");
+        String msg = "DEL_OK";
+
+        try{
+            // 정상적으로 실행이되면 1이 반환된다.
+            if(boardService.remove(bno, writer)!=1){
+                throw new Exception("delete failed");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            msg = "DEL_ERR";
+        }
+        return "redirect:/board/list"+sc.getQueryString();
     }
 
 

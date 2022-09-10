@@ -10,4 +10,6 @@ public interface BoardDao {
     int searchResultCnt(SearchCondition sc);
     int insert(BoardDto boardDto);
     BoardDto read(Integer bno);
+    int remove(Integer bno, String writer);
+    int update(BoardDto boardDto);
 }
