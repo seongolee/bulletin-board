@@ -17,6 +17,32 @@ public class PageHandler {
     // endPage 이후를 보여줄지의 여부
     private boolean showNext = false;
 
+    public PageHandler(SearchCondition sc, int totalCnt) {
+        this.sc = sc;
+        this.totalCnt = totalCnt;
+
+        getPaging(sc, totalCnt);
+    }
+
+    private void getPaging(SearchCondition sc, int totalCnt) {
+        // 페이지 갯수
+        this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize()==0 ? 0 : 1);
+        // 현재 페이지 : 총 페이지수 보다 같거나 적게
+        this.sc.setPage(Math.min(sc.getPage(), totalPage));
+        // nav 시작 번호 : 15 -> 11, 20 -> 11 처럼 10단위는 -1해야 정확한 nav 위치를 찍어 줄 수 있다.
+        this.beginPage = (this.sc.getPage() - 1) / NAV_SIZE * NAV_SIZE + 1;
+        // nav 마지막 번호 : begin 페이지가 각 단위 1이기때문에 nav_size - 1 해준다.
+        this.endPage = Math.min(beginPage + NAV_SIZE - 1, totalPage);
+        // nav 첫번째 번호가 1인지 확인
+        this.showPrev = beginPage!=1;
+        // nav 마지막 번호가 총 페이지 수 인지 확인
+        this.showNext = endPage != totalPage;
+    }
+
+    public String getQueryString(){
+        return sc.getQueryString();
+    }
+
     public SearchCondition getSc() {
         return sc;
     }

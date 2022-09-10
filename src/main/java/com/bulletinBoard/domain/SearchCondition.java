@@ -9,7 +9,12 @@ public class SearchCondition {
     // 현재 페이지
     private Integer page = 1;
     // 보여줄 페이지 크기
-    private Integer pageSize = DEFAULT_PAGE_SIZE;
+    private Integer pageSize = MIN_PAGE_SIZE;
+    // A : 제목+내용, T : 제목, W : 작성자
+    private String option;
+    // 검색어
+    private String keyword;
+
 
     public static final int MIN_PAGE_SIZE = 5;
     public static final int DEFAULT_PAGE_SIZE = 10;
@@ -19,8 +24,14 @@ public class SearchCondition {
     public SearchCondition() {}
 
     public SearchCondition(Integer page, Integer pageSize){
+        this(page, pageSize, "", "");
+    }
+
+    public SearchCondition(Integer page, Integer pageSize, String option, String keyword) {
         this.page = page;
         this.pageSize = pageSize;
+        this.option = option;
+        this.keyword = keyword;
     }
 
     // 예외로 page 값이 안들어올 수 있기떄문에 Overloading 처리
@@ -32,7 +43,25 @@ public class SearchCondition {
         return UriComponentsBuilder.newInstance()
                 .queryParam("page", page)
                 .queryParam("pageSize", pageSize)
+                .queryParam("option", option)
+                .queryParam("keyword", keyword)
                 .build().toString();
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public Integer getPage() {
@@ -50,11 +79,12 @@ public class SearchCondition {
 
     public void setPageSize(Integer pageSize) {
         // pageSize값이 Null인경우 DEFAULT_PAGE_SIZE 값으로 처리
-        this.pageSize = requireNonNullElse(pageSize, DEFAULT_PAGE_SIZE);
+        this.pageSize = requireNonNullElse(pageSize, MIN_PAGE_SIZE);
         // MIN_PAGE_SIZE, MAX_PAGE_SIZE 범위 안에 값만 유효하게 처리
         this.pageSize = max(MIN_PAGE_SIZE, min(this.pageSize, MAX_PAGE_SIZE));
     }
 
+    // offset
     public Integer getOffset() {
         return (page-1)*pageSize;
     }
@@ -64,6 +94,8 @@ public class SearchCondition {
         return "SearchCondition{" +
                 "page=" + page +
                 ", pageSize=" + pageSize +
+                ", option='" + option + '\'' +
+                ", keyword='" + keyword + '\'' +
                 '}';
     }
 }

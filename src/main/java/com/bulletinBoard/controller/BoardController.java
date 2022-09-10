@@ -1,6 +1,7 @@
 package com.bulletinBoard.controller;
 
 import com.bulletinBoard.domain.BoardDto;
+import com.bulletinBoard.domain.PageHandler;
 import com.bulletinBoard.domain.SearchCondition;
 import com.bulletinBoard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,12 @@ public class BoardController {
             return "redirect:/login/login?toURL="+request.getRequestURI();
 
         int totalCnt = boardService.getSearchResultCnt(sc);
+        PageHandler ph = new PageHandler(sc, totalCnt);
         List<BoardDto> boardDtoList = boardService.getSearchResultPage(sc);
 
         m.addAttribute("totalCnt", totalCnt);
         m.addAttribute("boardDtoList", boardDtoList);
+        m.addAttribute("ph", ph);
 
         return "boardList";
     }
@@ -45,14 +48,14 @@ public class BoardController {
         try{
             if(boardService.update(boardDto) != 1)
                 throw new Exception("Update failed");
-            m.addAttribute("msg", "MOD_OK");
+
+            return "redirect:/board/list";
 
         }catch(Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "MOD_ERR");
+            return "board";
         }
-
-        return "board";
     }
 
     @GetMapping("/read")
