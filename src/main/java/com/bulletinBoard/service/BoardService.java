@@ -9,4 +9,6 @@ public interface BoardService {
 
     List<BoardDto> getSearchResultPage(SearchCondition sc);
     int getSearchResultCnt(SearchCondition sc);
+    int write(BoardDto boardDto);
+    BoardDto read(Integer bno);
 }

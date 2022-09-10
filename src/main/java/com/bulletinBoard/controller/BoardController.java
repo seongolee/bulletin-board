@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,10 +36,50 @@ public class BoardController {
         return "boardList";
     }
 
+    @GetMapping("/read")
+    public String read(Integer bno, Model m){
+        BoardDto boardDto = boardService.read(bno);
+        m.addAttribute(boardDto);
+        return "board";
+    }
+
+    @GetMapping("/write")
+    public String write(Model m) {
+        m.addAttribute("mode", "new");
+        return "board";
+    }
+
+    @PostMapping("/write")
+    public String write(BoardDto boardDto, HttpSession session, Model m) {
+        // 세션에 저장되어있는 ID 가져오기
+        String writer = getSessionId(session);
+        System.out.println("session id check: " + writer);
+        boardDto.setWriter(writer);
+
+        try{
+            if(boardService.write(boardDto)!=1){
+                throw new Exception("write failed");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+            m.addAttribute("msg", "WRT_ERR");
+            m.addAttribute("mode", "new");
+            m.addAttribute(boardDto);
+            return "board";
+        }
+
+        return "redirect:/board/list";
+    }
+
+
     private boolean loginCheck(HttpServletRequest request) {
         // session 확인 session이 없으면 생성하지 않고 null 값을 반환
         HttpSession session = request.getSession(false);
         // session 이 존재하며, id 값이 존재 여부
         return session!=null && session.getAttribute("id")!=null;
+    }
+
+    private String getSessionId(HttpSession session){
+        return (String)session.getAttribute("id");
     }
 }

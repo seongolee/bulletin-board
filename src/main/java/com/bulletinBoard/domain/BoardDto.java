@@ -76,6 +76,12 @@ public class BoardDto {
 
     public BoardDto() {}
 
+    public BoardDto(String title, String content, String writer) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+    }
+
     public BoardDto(Integer bno, String title, String content, String writer, int view_cnt, int comment_cnt, Date reg_date) {
         this.bno = bno;
         this.title = title;

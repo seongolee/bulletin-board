@@ -16,4 +16,17 @@
         SELECT count(*)
         FROM board
     </select>
+
+    <!-- 게시물 작성 -->
+    <insert id="insert" parameterType="BoardDto">
+        INSERT INTO board(title, content, writer)
+        VALUES(#{title}, #{content}, #{writer})
+    </insert>
+
+    <!-- 게시물 번호에 맞는 게시물 조회 -->
+    <select id="read" parameterType="int" resultType="BoardDto">
+        SELECT *
+        FROM board
+        WHERE bno = #{bno}
+    </select>
 </mapper>

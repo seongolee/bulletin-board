@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
@@ -14,7 +16,9 @@ public class RegisterController {
 
     // 회원가입 페이지
     @GetMapping("/add")
-    public String register() {
+    public String register(HttpSession session) {
+        // 세션 종료
+        session.invalidate();
         return "registerForm";
     }
 

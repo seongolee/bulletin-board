@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%-- default 값이기 때문에 생략해도 된다.--%>
 <%@ page session="true"%>
 <c:set var="loginId" value="${sessionScope.id}"/>
 <c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
@@ -8,7 +9,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>게시판</title>
+  <title>게시판 글쓰기</title>
   <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
   <link rel="stylesheet" href="<c:url value='/css/board.css'/>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,7 +18,7 @@
 <body>
 <div id="menu">
   <ul>
-    <li id="logo">Portfolio</li>
+    <li id="logo"><a href="<c:url value='/'/>">Portfolio</a></li>
     <li><a href="<c:url value='/'/>">Home</a></li>
     <li><a href="<c:url value='/board/list'/>">Board</a></li>
     <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
@@ -45,6 +46,7 @@
     <c:if test="${mode ne 'new'}">
       <button type="button" id="writeNewBtn" class="btn btn-write"><i class="fa fa-pencil"></i> 글쓰기</button>
     </c:if>
+    <%-- board/write 를 로그인 안하고 직접 들어오면 둘다 공백이라 수정 삭제가 표시됨. 예외처리 해야함. --%>
     <c:if test="${boardDto.writer eq loginId}">
       <button type="button" id="modifyBtn" class="btn btn-modify"><i class="fa fa-edit"></i> 수정</button>
       <button type="button" id="removeBtn" class="btn btn-remove"><i class="fa fa-trash"></i> 삭제</button>

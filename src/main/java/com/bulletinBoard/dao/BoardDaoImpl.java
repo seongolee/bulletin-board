@@ -24,4 +24,14 @@ public class BoardDaoImpl implements BoardDao {
     public int searchResultCnt(SearchCondition sc) {
         return session.selectOne(namespace+"searchResultCnt", sc);
     }
+
+    @Override
+    public int insert(BoardDto boardDto){
+        return session.insert(namespace+"insert", boardDto);
+    }
+
+    @Override
+    public BoardDto read(Integer bno) {
+        return session.selectOne(namespace+"read", bno);
+    }
 }

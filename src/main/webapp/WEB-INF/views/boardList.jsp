@@ -18,7 +18,7 @@
 <body>
 <div id="menu">
   <ul>
-    <li id="logo">Portfolio</li>
+    <li id="logo"><a href="<c:url value='/'/>">Portfolio</a></li>
     <li><a href="<c:url value='/'/>">Home</a></li>
     <li><a href="<c:url value='/board/list'/>">Board</a></li>
     <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
@@ -28,19 +28,19 @@
 </div>
 <div style="text-align:center">
   <div class="board-container">
-<%--    <div class="search-container">--%>
-<%--      <form action="<c:url value="/board/list"/>" class="search-form" method="get">--%>
-<%--        <select class="search-option" name="option">--%>
-<%--          <option value="A" ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>제목+내용</option>--%>
-<%--          <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목만</option>--%>
-<%--          <option value="W" ${ph.sc.option=='W' ? "selected" : ""}>작성자</option>--%>
-<%--        </select>--%>
+    <div class="search-container">
+      <form action="<c:url value="/board/list"/>" class="search-form" method="get">
+        <select class="search-option" name="option">
+          <option value="A" ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>제목+내용</option>
+          <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목만</option>
+          <option value="W" ${ph.sc.option=='W' ? "selected" : ""}>작성자</option>
+        </select>
 
-<%--        <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">--%>
-<%--        <input type="submit" class="search-button" value="검색">--%>
-<%--      </form>--%>
-<%--      <button id="writeBtn" class="btn-write" onclick="location.href='<c:url value="/board/write"/>'"><i class="fa fa-pencil"></i> 글쓰기</button>--%>
-<%--    </div>--%>
+        <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">
+        <input type="submit" class="search-button" value="검색">
+      </form>
+      <button id="writeBtn" class="btn-write" onclick="location.href='<c:url value="/board/write"/>'"><i class="fa fa-pencil"></i> 글쓰기</button>
+    </div>
 
     <table>
       <tr>
@@ -53,8 +53,7 @@
       <c:forEach var="boardDto" items="${boardDtoList}">
         <tr>
           <td class="no">${boardDto.bno}</td>
-          <td class="title">${boardDto.title}</td>
-<%--          <td class="title"><a href="<c:url value="/board/read${ph.sc.queryString}&bno=${boardDto.bno}"/>">${boardDto.title}</a></td>--%>
+          <td class="title"><a href="<c:url value="/board/read?bno=${boardDto.bno}"/>">${boardDto.title}</a></td>
           <td class="writer">${boardDto.writer}</td>
           <td class="regdate"><fmt:formatDate value="${boardDto.reg_date}" pattern="yyyy-MM-dd HH:mm" type="both"/></td>
           <td class="viewcnt">${boardDto.view_cnt}</td>

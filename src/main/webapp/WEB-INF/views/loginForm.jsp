@@ -16,7 +16,7 @@
 <body>
 <div id="menu">
   <ul>
-    <li id="logo">Portfolio</li>
+    <li id="logo"><a href="<c:url value='/'/>">Portfolio</a></li>
     <li><a href="<c:url value='/'/>">Home</a></li>
     <li><a href="<c:url value='/board/list'/>">Board</a></li>
     <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>

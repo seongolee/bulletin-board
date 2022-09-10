@@ -40,7 +40,8 @@ public class SearchCondition {
     }
 
     public void setPage(Integer page) {
-        this.page = page;
+        // page값이 Null인경우 들어올 경우 1로 처리
+        this.page = requireNonNullElse(page, 1);
     }
 
     public Integer getPageSize() {
@@ -48,7 +49,7 @@ public class SearchCondition {
     }
 
     public void setPageSize(Integer pageSize) {
-        // pageSize 값에 공백이 들어올 경우 DEFAULT_PAGE_SIZE 로 예외처리
+        // pageSize값이 Null인경우 DEFAULT_PAGE_SIZE 값으로 처리
         this.pageSize = requireNonNullElse(pageSize, DEFAULT_PAGE_SIZE);
         // MIN_PAGE_SIZE, MAX_PAGE_SIZE 범위 안에 값만 유효하게 처리
         this.pageSize = max(MIN_PAGE_SIZE, min(this.pageSize, MAX_PAGE_SIZE));

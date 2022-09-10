@@ -16,4 +16,64 @@ public class PageHandler {
     private boolean showPrev = false;
     // endPage 이후를 보여줄지의 여부
     private boolean showNext = false;
+
+    public SearchCondition getSc() {
+        return sc;
+    }
+
+    public void setSc(SearchCondition sc) {
+        this.sc = sc;
+    }
+
+    public int getTotalCnt() {
+        return totalCnt;
+    }
+
+    public void setTotalCnt(int totalCnt) {
+        this.totalCnt = totalCnt;
+    }
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public int getBeginPage() {
+        return beginPage;
+    }
+
+    public void setBeginPage(int beginPage) {
+        this.beginPage = beginPage;
+    }
+
+    public int getEndPage() {
+        return endPage;
+    }
+
+    public void setEndPage(int endPage) {
+        this.endPage = endPage;
+    }
+
+    public boolean isShowPrev() {
+        return showPrev;
+    }
+
+    public void setShowPrev(boolean showPrev) {
+        this.showPrev = showPrev;
+    }
+
+    public boolean isShowNext() {
+        return showNext;
+    }
+
+    public void setShowNext(boolean showNext) {
+        this.showNext = showNext;
+    }
+
+    public int getNAV_SIZE() {
+        return NAV_SIZE;
+    }
 }

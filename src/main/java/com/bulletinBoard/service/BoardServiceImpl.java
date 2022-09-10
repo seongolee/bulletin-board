@@ -24,4 +24,16 @@ public class BoardServiceImpl implements BoardService {
         // 조건에 맞는 총 조회수 조회
         return boardDao.searchResultCnt(sc);
     }
+
+    @Override
+    public int write(BoardDto boardDto){
+        // 게시글 쓰기
+        return boardDao.insert(boardDto);
+    }
+
+    @Override
+    public BoardDto read(Integer bno) {
+        // 게시물 번호에 맞는 게시글 조회
+        return boardDao.read(bno);
+    }
 }
