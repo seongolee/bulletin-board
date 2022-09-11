@@ -11,9 +11,9 @@ public class SearchCondition {
     // 보여줄 페이지 크기
     private Integer pageSize = MIN_PAGE_SIZE;
     // A : 제목+내용, T : 제목, W : 작성자
-    private String option;
+    private String option = "";
     // 검색어
-    private String keyword;
+    private String keyword = "";
 
 
     public static final int MIN_PAGE_SIZE = 5;

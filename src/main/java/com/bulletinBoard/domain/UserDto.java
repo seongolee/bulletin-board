@@ -1,8 +1,7 @@
 package com.bulletinBoard.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.text.ParseException;
 
 public class UserDto {
     // 아이디
