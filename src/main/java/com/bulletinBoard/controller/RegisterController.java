@@ -33,7 +33,6 @@ public class RegisterController {
     @PostMapping("/idCheck")
     @ResponseBody
     public String idCheck(@RequestBody UserDto userDto) throws Exception {
-        System.out.println(userDto.getPwd());
         return registerService.idCheck(userDto.getId());
     }
 }

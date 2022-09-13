@@ -4,7 +4,10 @@
     padding: 0;
 }
 
-a { text-decoration: none;  }
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
 
 ul {
     list-style-type: none;
@@ -35,10 +38,18 @@ ul > li > a:hover {
     border-bottom: 3px solid rgb(209, 209, 209);
 }
 
+#menu {
+    display: flex;
+    justify-content: space-around;
+}
+
+#menu ul {
+    padding: 0 20px;
+}
+
 #logo {
     color:white;
     font-size: 18px;
-    padding-left:40px;
     margin-right:auto;
     display: flex;
 }
