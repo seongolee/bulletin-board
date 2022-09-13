@@ -12,4 +12,6 @@ public interface BoardDao {
     BoardDto read(Integer bno);
     int remove(Integer bno, String writer);
     int update(BoardDto boardDto);
+
+    int increaseViewCnt(Integer bno, String writer);
 }

@@ -59,8 +59,11 @@ public class BoardController {
     }
 
     @GetMapping("/read")
-    public String read(Integer bno, Model m){
-        BoardDto boardDto = boardService.read(bno);
+    public String read(Integer bno, HttpSession session, Model m){
+        // 세션에 저장되어있는 ID 가져오기
+        String writer = getSessionId(session);
+        // 게시글 조회
+        BoardDto boardDto = boardService.read(bno, writer);
         m.addAttribute(boardDto);
         return "board";
     }
@@ -108,7 +111,6 @@ public class BoardController {
         }
         return "redirect:/board/list"+sc.getQueryString();
     }
-
 
     private boolean loginCheck(HttpServletRequest request) {
         // session 확인 session이 없으면 생성하지 않고 null 값을 반환

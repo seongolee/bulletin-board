@@ -10,7 +10,7 @@ public interface BoardService {
     List<BoardDto> getSearchResultPage(SearchCondition sc);
     int getSearchResultCnt(SearchCondition sc);
     int write(BoardDto boardDto);
-    BoardDto read(Integer bno);
+    BoardDto read(Integer bno, String writer);
     int remove(Integer bno, String writer);
     int update(BoardDto boardDto);
 }

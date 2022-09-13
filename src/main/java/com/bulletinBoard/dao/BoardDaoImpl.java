@@ -49,4 +49,12 @@ public class BoardDaoImpl implements BoardDao {
     public int update(BoardDto boardDto) {
         return session.update(namespace+"update", boardDto);
     }
+
+    @Override
+    public int increaseViewCnt(Integer bno, String writer) {
+        Map map = new HashMap();
+        map.put("bno", bno);
+        map.put("writer", writer);
+        return session.update(namespace+"increaseViewCnt", map);
+    }
 }

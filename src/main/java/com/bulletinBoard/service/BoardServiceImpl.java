@@ -5,6 +5,7 @@ import com.bulletinBoard.domain.BoardDto;
 import com.bulletinBoard.domain.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,8 +33,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardDto read(Integer bno) {
+    @Transactional
+    public BoardDto read(Integer bno, String writer) {
         // 게시글 조회
+        boardDao.increaseViewCnt(bno, writer);
         return boardDao.read(bno);
     }
 
