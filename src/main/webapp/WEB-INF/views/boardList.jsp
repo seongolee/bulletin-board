@@ -23,7 +23,6 @@
     <li><a href="<c:url value='/board/list'/>">Board</a></li>
     <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
     <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
-    <li><a href=""><i class="fas fa-search small"></i></a></li>
   </ul>
 </div>
 <div style="text-align:center">

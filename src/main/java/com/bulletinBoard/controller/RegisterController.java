@@ -25,15 +25,21 @@ public class RegisterController {
     // 회원등록
     @PostMapping("/add")
     public String save(UserDto userDto) {
-        registerService.insertUser(userDto);
+        try{
+            registerService.insertUser(userDto);
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
         return "redirect:/";
+
     }
 
     // 아이디 중복확인
     @PostMapping("/idCheck")
     @ResponseBody
     public String idCheck(@RequestBody UserDto userDto) throws Exception {
-        System.out.println(userDto.getPwd());
         return registerService.idCheck(userDto.getId());
     }
 }
