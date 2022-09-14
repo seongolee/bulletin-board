@@ -86,7 +86,7 @@ public class LoginController {
 
             String subject = "임시 비밀번호";
             String content;
-            String from = "seongo0521@gmail.com";
+            String from = "";
             String to = userDto.getEmail();
 
             // 12자리의 임시 비밀번호 생성
