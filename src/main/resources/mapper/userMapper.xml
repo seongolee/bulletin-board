@@ -3,9 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bulletinBoard.dao.UserMapper">
+    <!-- id에 맞는 유저 조회 -->
     <select id="selectUser" parameterType="String" resultType="UserDto">
         SELECT *
         FROM user_info
         WHERE id = #{value}
     </select>
+
+    <select id="findPwd" parameterType="UserDto" resultType="int">
+        SELECT count(*)
+        FROM user_info
+        WHERE id = #{id} AND email = #{email}
+    </select>
+
+    <update id="updatePwd" parameterType="UserDto">
+        UPDATE user_info
+        set pwd = #{pwd}
+        WHERE id = #{id} AND email = #{email}
+    </update>
 </mapper>
