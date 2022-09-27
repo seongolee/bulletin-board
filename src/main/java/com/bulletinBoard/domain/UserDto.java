@@ -1,5 +1,6 @@
 package com.bulletinBoard.domain;
 
+import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.text.ParseException;
 
@@ -83,7 +84,13 @@ public class UserDto {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
-        this.birth = Date.valueOf(birth);
+        // SimpleDateFormat 으로 형식 만들어주고,
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+        // util.Date 형식에 format.parse(birth) 변환해서 넣어준다.
+        java.util.Date date = format.parse(birth);
+        // getTime(): second로 변환되어 반환
+        // sql.Date 자료형으로 date.getTime()해서 넣어준다.
+        this.birth = new java.sql.Date(date.getTime());
     }
 
     public UserDto(String id, String pwd, String name, String email, Date birth, String phone_number, Date reg_date) {

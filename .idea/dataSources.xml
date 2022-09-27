@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/springbasic</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="bulletin-board" uuid="cdc39d50-1de0-42cd-86fe-b8c180713647">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://db-board.c9itpvsuzo0s.ap-northeast-2.rds.amazonaws.com :3306/webservice</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

@@ -11,7 +11,7 @@
     <!-- db-connection 정보 파일 분리 -->
     <util:properties id="dataSourceConfig" location="classpath:db-connection.properties"/>
     <!-- mail-connection 정보 파일 분리 -->
-    <util:properties id="mailConfig" location="classpath:mail-connection.properties"/>
+<!--    <util:properties id="mailConfig" location="classpath:mail-connection.properties"/>-->
 
     <!-- Root Context: defines shared resources visible to all other web components -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -25,22 +25,22 @@
 
     <!-- gmail 설정 -->
     <!-- smtp 인증을 받기 위해 사용 -->
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="#{mailConfig['host']}"></property>
-        <property name="port" value="#{mailConfig['port']}"></property>
-        <property name="username" value="#{mailConfig['username']}"></property>
-        <property name="password" value="#{mailConfig['password']}"></property>
-        <!-- 보안연결 TLS 관련된 설정 -->
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.transport.protocol">smtp</prop>
-                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
-                <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
-            </props>
-        </property>
-    </bean>
+<!--    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
+<!--        <property name="host" value="#{mailConfig['host']}"></property>-->
+<!--        <property name="port" value="#{mailConfig['port']}"></property>-->
+<!--        <property name="username" value="#{mailConfig['username']}"></property>-->
+<!--        <property name="password" value="#{mailConfig['password']}"></property>-->
+<!--        &lt;!&ndash; 보안연결 TLS 관련된 설정 &ndash;&gt;-->
+<!--        <property name="javaMailProperties">-->
+<!--            <props>-->
+<!--                <prop key="mail.smtp.auth">true</prop>-->
+<!--                <prop key="mail.smtp.starttls.enable">true</prop>-->
+<!--                <prop key="mail.transport.protocol">smtp</prop>-->
+<!--                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>-->
+<!--                <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+<!--    </bean>-->
 
     <!-- sqlSesson을 사용하기 위해 설정 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

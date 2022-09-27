@@ -69,8 +69,12 @@ public class SearchCondition {
     }
 
     public void setPage(Integer page) {
-        // page값이 Null인경우 들어올 경우 1로 처리
-        this.page = requireNonNullElse(page, 1);
+        // page 값이 null 이거나 0으로 들어오는 경우 1로 처리해준다.
+        // 게시물이 totalCnt일때 예외 발생헀음.
+        if(page == null || page == 0)
+            this.page = 1;
+        else
+            this.page = page;
     }
 
     public Integer getPageSize() {
@@ -96,6 +100,7 @@ public class SearchCondition {
                 ", pageSize=" + pageSize +
                 ", option='" + option + '\'' +
                 ", keyword='" + keyword + '\'' +
+                ", offset='" + getOffset() + '\'' +
                 '}';
     }
 }

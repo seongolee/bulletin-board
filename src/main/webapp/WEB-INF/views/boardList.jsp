@@ -1,11 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<% String msg = request.getParameter("msg"); %>
 
 <%-- 세션에 저장된 아이디 쓸 수 있게 저장 --%>
 <c:set var="loginId" value="${sessionScope.id}"/>
 <c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
 <c:set var="loginOut" value="${loginId=='' ? 'Login' : 'logout'}"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,12 @@
   <title>게시판</title>
   <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
   <link rel="stylesheet" href="<c:url value='/css/boardList.css'/>">
+  <script>
+    $(document).ready(function() {
+      if(<%=msg%> != null || <%=msg%> === '')
+        alert(<%=msg%>);
+    })
+  </script>
 </head>
 <body>
 <div id="menu">

@@ -17,7 +17,7 @@ public class RegisterController {
     // 회원가입 페이지
     @GetMapping("/add")
     public String register(HttpSession session) {
-        // 세션 종료
+        // 남아있는 세션이 있을 수 있기 때문에 세션을 종료시킴
         session.invalidate();
         return "registerForm";
     }

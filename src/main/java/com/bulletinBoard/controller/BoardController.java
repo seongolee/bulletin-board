@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -27,14 +28,17 @@ public class BoardController {
         if(!loginCheck(request))
             // 로그인이 되어있지 않으면 로그인화면으로 보내면서 requestURL을 toURL 파람으로 저장
             return "redirect:/login/login?toURL="+request.getRequestURI();
+        try {
+            int totalCnt = boardService.getSearchResultCnt(sc);
+            PageHandler ph = new PageHandler(sc, totalCnt);
+            List<BoardDto> boardDtoList = boardService.getSearchResultPage(sc);
 
-        int totalCnt = boardService.getSearchResultCnt(sc);
-        PageHandler ph = new PageHandler(sc, totalCnt);
-        List<BoardDto> boardDtoList = boardService.getSearchResultPage(sc);
-
-        m.addAttribute("totalCnt", totalCnt);
-        m.addAttribute("boardDtoList", boardDtoList);
-        m.addAttribute("ph", ph);
+            m.addAttribute("totalCnt", totalCnt);
+            m.addAttribute("boardDtoList", boardDtoList);
+            m.addAttribute("ph", ph);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         return "boardList";
     }
@@ -49,7 +53,9 @@ public class BoardController {
             if(boardService.update(boardDto) != 1)
                 throw new Exception("Update failed");
 
-            return "redirect:/board/list";
+            String msg = URLEncoder.encode("수정되었습니다.", "UTF-8");
+
+            return "redirect:/board/list?msg=" + msg;
 
         }catch(Exception e) {
             e.printStackTrace();
