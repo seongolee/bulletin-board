@@ -26,7 +26,7 @@ public class BoardController {
     public String list(Model m, SearchCondition sc, HttpServletRequest request) {
         // 로그인이 되어있는지 확인
         if(!loginCheck(request))
-            // 로그인이 되어있지 않으면 로그인화면으로 보내면서 requestURL을 toURL 파람으로 저장
+            // 로그인이 되어있지 않으면 로그인화면으로 보내면서 requestURI을 toURL 파람으로 저장
             return "redirect:/login/login?toURL="+request.getRequestURI();
         try {
             int totalCnt = boardService.getSearchResultCnt(sc);

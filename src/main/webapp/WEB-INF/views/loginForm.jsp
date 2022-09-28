@@ -9,38 +9,47 @@
 <head>
   <meta charset="UTF-8">
   <title>로그인</title>
-  <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
   <link rel="stylesheet" href="<c:url value='/css/loginForm.css'/>">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <!-- CSS only -->
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+          crossorigin="anonymous">
 </head>
 <body>
-<div id="menu">
-  <ul>
-    <li id="logo"><a href="<c:url value='/'/>">Portfolio</a></li>
-    <li><a href="<c:url value='/'/>">Home</a></li>
-    <li><a href="<c:url value='/board/list'/>">Board</a></li>
-    <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
-    <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
-  </ul>
-</div>
-<form action="<c:url value="/login/login"/>" method="post" onsubmit="return formCheck(this);">
-  <h3 id="title">Login</h3>
-  <div id="msg">
-    <c:if test="${not empty param.msg}">
-      <i class="fa fa-exclamation-circle">${param.msg}</i>
-    </c:if>
-  </div>
-  <input type="text" name="id" value="${cookie.id.value}" placeholder="아이디 입력" autofocus>
+<main class="form-signin w-100 m-auto">
+  <form action="<c:url value="/login/login"/>" method="post" onsubmit="return formCheck(this);">
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
+    <div id="msg">
+      <c:if test="${not empty param.msg}">
+        <i class="fa fa-exclamation-circle">${param.msg}</i>
+      </c:if>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" name="id" id="floatingInput" placeholder="아이디 입력" value="${cookie.id.value}">
+      <label for="floatingInput">Id</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="pwd" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
 
-  <%-- 다른 url 로 접근시 로그인이 안되어있을때 url 저장후 로그인 후 url로 보낼줄때 사용 --%>
-  <input type="hidden" name="toURL" value="${param.toURL}">
-  <input type="password" name="pwd" placeholder="비밀번호">
-  <button>로그인</button>
-  <div>
-    <label><input type="checkbox" name="rememberId" ${empty cookie.id.value ? "":"checked"}> 아이디 기억</label> |
-    <a href="<c:url value='/login/findPwd'/>">비밀번호 찾기</a> |
-    <a href="<c:url value='/register/add'/>">회원가입</a>
-  </div>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <%-- 다른 url 로 접근시 로그인이 안되어있을때 url 저장후 로그인 후 url로 보낼줄때 사용 --%>
+    <input type="hidden" name="toURL" value="${param.toURL}" />
+    <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+  </form>
+</main>
+<%--  <div>--%>
+<%--    <label><input type="checkbox" name="rememberId" ${empty cookie.id.value ? "":"checked"}> 아이디 기억</label> |--%>
+<%--    <a href="<c:url value='/login/findPwd'/>">비밀번호 찾기</a> |--%>
+<%--    <a href="<c:url value='/register/add'/>">회원가입</a>--%>
+<%--  </div>--%>
   <script>
     function formCheck(frm) {
       let msg ='';

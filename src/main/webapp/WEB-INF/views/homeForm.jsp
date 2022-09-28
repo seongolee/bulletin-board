@@ -87,8 +87,13 @@
     <%-- loginOut = login 일때 --%>
     <c:if test="${loginOut eq 'login'}">
       <div class="text-end">
-        <button type="button" class="btn btn-light text-dark me-2" onclick="location.href='/login/login'">Login</button>
+        <button type="button" class="btn btn-light text-dark me-2" onclick="location.href='${loginOutLink}'">${loginOut}</button>
         <button type="button" class="btn btn-primary" onclick="location.href='/register/add'">Sign-up</button>
+      </div>
+    </c:if>
+    <c:if test="${loginOut eq 'logout'}">
+      <div class="text-end">
+        <button type="button" class="btn btn-light text-dark me-2" onclick="location.href='${loginOutLink}'">${loginOut}</button>
       </div>
     </c:if>
   </div>
