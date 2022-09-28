@@ -33,7 +33,7 @@
 
       <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
         <li>
-          <a href="<c:url value='/'/>" class="nav-link text-secondary">
+          <a href="<c:url value='/'/>" class="nav-link text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi d-block mx-auto mb-1" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
               <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
@@ -42,7 +42,7 @@
           </a>
         </li>
         <li>
-          <a href="<c:url value='/board/list'/>" class="nav-link text-white">
+          <a href="<c:url value='/board/list'/>" class="nav-link text-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi d-block mx-auto mb-1" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
               <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
@@ -145,23 +145,23 @@
               <thead>
               <tr>
                 <th scope="col">#</th>
-                <td style="font-weight: bold">제목</td>
-                <td style="font-weight: bold">이름</td>
-                <td style="font-weight: bold">등록일</td>
-                <td style="font-weight: bold">조회수</td>
-                <td style="font-weight: bold">Action</td>
+                <td class="col-title" style="font-weight: bold">제목</td>
+                <td class="col-name">이름</td>
+                <td class="col-reg-date">등록일</td>
+                <td class="col-view-cnt">조회수</td>
+                <td class="col-action">Action</td>
               </tr>
               </thead>
               <tbody>
               <c:forEach var="boardDto" items="${boardDtoList}">
               <tr>
                 <th scope="row">${boardDto.bno}</th>
-                <td>${boardDto.title}</td>
-                <td>${boardDto.writer}</td>
-                <td><fmt:formatDate value="${boardDto.reg_date}" pattern="yyyy-mm-dd HH:mm"/> </td>
-                <td>${boardDto.view_cnt}</td>
+                <td class="col-title">${boardDto.title}</td>
+                <td class="col-name">${boardDto.writer}</td>
+                <td class="col-reg-date"><fmt:formatDate value="${boardDto.reg_date}" pattern="yyyy-mm-dd HH:mm"/> </td>
+                <td class="col-action">${boardDto.view_cnt}</td>
                 <td>
-                  <div class="action">
+                  <div class="action col-action">
                     <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
                     <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
                   </div>
@@ -174,17 +174,22 @@
           <!-- end project-list -->
           <c:if test="${totalCnt!=null && totalCnt!=0}">
             <div class="pt-3">
-              <ul class="pagination justify-content-end mb-0">
-                <li class="page-item ${ph.showPrev ? '' : 'disabled'}">
-                  <a class="page-link" href="<c:url value='/board/list${ph.sc.getQueryString(ph.beginPage-1)}'/>">Previous</a>
-                </li>
-                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                  <li class="page-item ${i==ph.sc.page ? 'active' : ''}"><a class="page-link" href="<c:url value='/board/list${ph.sc.getQueryString(i)}'/>">${i}</a></li>
-                </c:forEach>
-                <li class="page-item ${ph.showNext ? '' : 'disabled'}">
-                  <a class="page-link" href="<c:url value='/board/list${ph.sc.getQueryString(ph.endPage + 1)}'/>">Next</a>
-                </li>
-              </ul>
+              <div class="btn-wrapper">
+                <button type="button" onclick="location.href='/board/write'" class="btn btn-dark">글쓰기</button>
+              </div>
+              <div class="page-handler-wrapper">
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item ${ph.showPrev ? '' : 'disabled'}">
+                    <a class="page-link" href="<c:url value='/board/list${ph.sc.getQueryString(ph.beginPage-1)}'/>">Previous</a>
+                  </li>
+                  <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                    <li class="page-item ${i==ph.sc.page ? 'active' : ''}"><a class="page-link" href="<c:url value='/board/list${ph.sc.getQueryString(i)}'/>">${i}</a></li>
+                  </c:forEach>
+                  <li class="page-item ${ph.showNext ? '' : 'disabled'}">
+                    <a class="page-link" href="<c:url value='/board/list${ph.sc.getQueryString(ph.endPage + 1)}'/>">Next</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </c:if>
 
