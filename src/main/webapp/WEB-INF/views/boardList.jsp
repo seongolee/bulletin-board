@@ -161,10 +161,12 @@
                 <td class="col-reg-date"><fmt:formatDate value="${boardDto.reg_date}" pattern="yyyy-mm-dd HH:mm"/> </td>
                 <td class="col-action">${boardDto.view_cnt}</td>
                 <td>
-                  <div class="action col-action">
-                    <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
-                    <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
-                  </div>
+                  <c:if test="${boardDto.writer eq loginId}">
+                    <div class="action col-action">
+                      <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                      <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
+                    </div>
+                  </c:if>
                 </td>
               </tr>
               </c:forEach>
