@@ -21,6 +21,8 @@
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
           crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script src="<c:url value='/js/boardList.js'/>"></script>
 </head>
 <body>
 <div class="px-3 py-2 text-bg-dark">
@@ -145,7 +147,7 @@
               <thead>
               <tr>
                 <th scope="col">#</th>
-                <td class="col-title" style="font-weight: bold">제목</td>
+                <td class="col-title">제목</td>
                 <td class="col-name">이름</td>
                 <td class="col-reg-date">등록일</td>
                 <td class="col-view-cnt">조회수</td>
@@ -153,22 +155,22 @@
               </tr>
               </thead>
               <tbody>
-              <c:forEach var="boardDto" items="${boardDtoList}">
-              <tr>
-                <th scope="row">${boardDto.bno}</th>
-                <td class="col-title">${boardDto.title}</td>
-                <td class="col-name">${boardDto.writer}</td>
-                <td class="col-reg-date"><fmt:formatDate value="${boardDto.reg_date}" pattern="yyyy-mm-dd HH:mm"/> </td>
-                <td class="col-action">${boardDto.view_cnt}</td>
-                <td>
-                  <c:if test="${boardDto.writer eq loginId}">
-                    <div class="action col-action">
-                      <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
-                      <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
-                    </div>
-                  </c:if>
-                </td>
-              </tr>
+              <c:forEach var="boardDto" items="${boardDtoList}" varStatus="status">
+                <tr>
+                  <th scope="row">${boardDto.bno}</th>
+                  <td class="col-title poster-title"><a href="#" onclick="posterTitle(this)" tabindex="">${boardDto.title}</a></td>
+                  <td class="col-name">${boardDto.writer}</td>
+                  <td class="col-reg-date"><fmt:formatDate value="${boardDto.reg_date}" pattern="yyyy-mm-dd HH:mm"/> </td>
+                  <td class="col-action">${boardDto.view_cnt}</td>
+                  <td>
+                    <c:if test="${boardDto.writer eq loginId}">
+                      <div class="action col-action">
+                        <a href="<c:url value='/board/modify'/>" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                        <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
+                      </div>
+                    </c:if>
+                  </td>
+                </tr>
               </c:forEach>
               </tbody>
             </table>

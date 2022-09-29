@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
@@ -42,9 +43,20 @@ public class BoardController {
 
         return "boardList";
     }
+    @GetMapping("/modify")
+    public String modify(HttpServletRequest request, Model m){
+        // 로그인이 되어있는지 확인
+        if(!loginCheck(request))
+            // 로그인이 되어있지 않으면 로그인화면으로 보내면서 requestURI을 toURL 파람으로 저장
+            return "redirect:/login/login?toURL="+request.getRequestURI();
+
+        m.addAttribute("mode", "edit");
+
+        return "board";
+    }
 
     @PostMapping("/modify")
-    public String update(BoardDto boardDto, HttpSession session,Model m){
+    public String update(BoardDto boardDto, HttpSession session, Model m){
         // bno, title, content -> boardDto
         String writer = (String)session.getAttribute("id");
         boardDto.setWriter(writer);
@@ -71,20 +83,28 @@ public class BoardController {
         // 게시글 조회
         BoardDto boardDto = boardService.read(bno, writer);
         m.addAttribute(boardDto);
+        m.addAttribute("mode", "read");
         return "board";
     }
 
+
     @GetMapping("/write")
-    public String write(Model m) {
+    public String write(Model m, String mode, HttpServletRequest request) {
+        // 로그인이 되어있는지 확인
+        if(!loginCheck(request))
+            // 로그인이 되어있지 않으면 로그인화면으로 보내면서 requestURI을 toURL 파람으로 저장
+            return "redirect:/login/login?toURL="+request.getRequestURI();
+
         m.addAttribute("mode", "new");
+
         return "board";
     }
+
 
     @PostMapping("/write")
     public String write(BoardDto boardDto, HttpSession session, Model m) {
         // 세션에 저장되어있는 ID 가져오기
         String writer = getSessionId(session);
-        System.out.println("session id check: " + writer);
         boardDto.setWriter(writer);
 
         try{
@@ -124,6 +144,7 @@ public class BoardController {
         // session 이 존재하며, id 값이 존재 여부
         return session!=null && session.getAttribute("id")!=null;
     }
+
 
     private String getSessionId(HttpSession session){
         return (String)session.getAttribute("id");

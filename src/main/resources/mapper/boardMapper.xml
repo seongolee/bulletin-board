@@ -39,8 +39,8 @@
 
     <!-- 게시물 작성 -->
     <insert id="insert" parameterType="BoardDto">
-        INSERT INTO board(title, content, writer)
-        VALUES(#{title}, #{content}, #{writer})
+        INSERT INTO board(title, content, writer, view_cnt, comment_cnt)
+        VALUES(#{title}, #{content}, #{writer}, 0, 0)
     </insert>
 
     <!-- 게시물 조회 -->

@@ -10,40 +10,35 @@
 <head>
   <meta charset="UTF-8">
   <title>게시판 글쓰기</title>
-  <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
   <link rel="stylesheet" href="<c:url value='/css/board.css'/>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+        crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
-<div id="menu">
-  <ul>
-    <li id="logo"><a href="<c:url value='/'/>">Portfolio</a></li>
-    <li><a href="<c:url value='/'/>">Home</a></li>
-    <li><a href="<c:url value='/board/list'/>">Board</a></li>
-    <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
-    <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
-    <li><a href=""><i class="fa fa-search"></i></a></li>
-  </ul>
-</div>
+<%@ include file="./header.jsp" %>
 <script>
   let msg = "${msg}";
   if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
   if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
 </script>
 <div class="container">
-  <h2 class="writing-header">게시판 ${mode=="new" ? "글쓰기" : "읽기"}</h2>
+<%--  <h2 class="writing-header">게시판 ${mode=="new" ? "글쓰기" : "읽기"}</h2>--%>
+  <h2 class="writing-header">게시판 ${mode=="new" ? "글쓰기" : mode=="edit" ? "수정" : "읽기" }</h2>
   <form id="form" class="frm" action="" method="post">
     <input type="hidden" name="bno" value="${boardDto.bno}">
 
-    <input name="title" type="text" value="${boardDto.title}" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>            <br>
-    <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${boardDto.content}</textarea>      <br>
+    <input name="title" type="text" value="${boardDto.title}" placeholder=" 제목을 입력해 주세요." ${mode=="new" || mode=="edit" ? "" : "readonly='readonly'"}>            <br>
+    <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" || mode=="edit" ? "" : "readonly='readonly'"}>${boardDto.content}</textarea>      <br>
 
 
-    <c:if test="${mode eq 'new'}">
+    <c:if test="${mode ne 'read'}">
       <button type="button" id="writeBtn" class="btn btn-write"><i class="fa fa-pencil"></i> 등록</button>
     </c:if>
-    <c:if test="${mode ne 'new'}">
+    <c:if test="${mode eq 'read'}">
       <button type="button" id="writeNewBtn" class="btn btn-write"><i class="fa fa-pencil"></i> 글쓰기</button>
     </c:if>
     <%-- board/write 를 로그인 안하고 직접 들어오면 둘다 공백이라 수정 삭제가 표시됨. 예외처리 해야함. --%>

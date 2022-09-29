@@ -23,6 +23,11 @@ body{
     margin-right: auto;
 }
 
+.poster-title a {
+    text-decoration: none;
+    color: black;
+}
+
 .avatar-xs {
     height: 2.3rem;
     width: 2.3rem;
