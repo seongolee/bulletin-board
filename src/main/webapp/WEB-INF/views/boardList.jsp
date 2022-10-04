@@ -125,9 +125,9 @@
             <div class="form-group mb-0">
               <label>Search</label>
               <div class="input-group mb-0">
-                <input type="text" class="form-control" placeholder="Search..." aria-describedby="project-search-addon" />
+                <input type="text" class="form-control" name="keyword" placeholder="Search..." aria-describedby="project-search-addon" />
                 <div class="input-group-append">
-                  <button class="btn btn-danger" type="button" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
+                  <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
                 </div>
               </div>
             </div>
